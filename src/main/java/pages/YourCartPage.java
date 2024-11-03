@@ -3,6 +3,10 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class YourCartPage {
 
@@ -14,8 +18,14 @@ public class YourCartPage {
     private By resetAppState = By.id("reset_sidebar_link");
     private By closeHamburger = By.id("react-burger-cross-btn");
     private By cartIcon = By.className("shopping_cart_link");
+    private By cartBadge = By.className("shopping_cart_badge");
     private By productName = By.className("inventory_item_name");
-    private By removeFromCartButton = By.cssSelector(".btn.btn_secondary.btn_small.btn_inventory");
+    private By removeBackPackButton = By.id("remove-sauce-labs-backpack");
+    private By removeBikeLightButton = By.id("remove-sauce-labs-bike-light");
+    private By removeBoltTShirtButton = By.id("remove-sauce-labs-bolt-t-shirt");
+    private By removeFleeceJacketButton = By.id("remove-sauce-labs-fleece-jacket");
+    private By removeOneSieButton = By.id("remove-sauce-labs-onesie");
+    private By removeRedTShirtButton = By.id("remove-test.allthethings()-t-shirt-(red)");
     private By continueShoppingButton = By.id("continue-shopping");
     private By checkoutButton = By.id("checkout");
     private By twitterIcon = By.xpath("//a[@data-test='social-twitter']");
@@ -30,7 +40,20 @@ public class YourCartPage {
         driver.findElement(hamburgerButton).click();
     }
 
-    public void closeHamburgerButton(){
+    public boolean isHamburgerMenuIconVisible(){
+        try{
+            return driver.findElement(hamburgerButton).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
+    public void waitForHamburgerMenuToBeDisplayedWhenClicked(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(aboutLink));
+    }
+
+    public void clickCloseHamburgerButton(){
         driver.findElement(closeHamburger).click();
     }
 
@@ -41,6 +64,19 @@ public class YourCartPage {
 
     public void clickAbout(){
         driver.findElement(aboutLink).click();
+    }
+
+    public boolean isAboutLinkVisible(){
+        try {
+            return driver.findElement(aboutLink).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public void waitForAboutLinkToBeInvisible() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(aboutLink));
     }
 
     public LoginPage clickLogout(){
@@ -57,13 +93,89 @@ public class YourCartPage {
         return new YourCartPage(driver);
     }
 
+    public boolean isCartBadgeVisible(){
+        try {
+            return driver.findElement(cartBadge).isDisplayed();
+        }catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public ProductDetailsPage clickProductName(int index){
         driver.findElements(productName).get(index).click();
         return new ProductDetailsPage(driver);
     }
 
-    public void clickRemoveFromCartButton(int index){
-        driver.findElements(removeFromCartButton).get(index).click();
+    public void clickBackpackRemoveButton(){
+        driver.findElement(removeBackPackButton).click();
+    }
+
+    public boolean isBackpackRemoveButtonVisible(){
+        try {
+            return driver.findElement(removeBackPackButton).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
+    public void clickBikeLightRemoveButton(){
+        driver.findElement(removeBikeLightButton).click();
+    }
+
+    public boolean isBikeLightRemoveButtonVisible(){
+        try {
+            return driver.findElement(removeBikeLightButton).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
+    public void clickBoltTShirtRemoveButton(){
+        driver.findElement(removeBoltTShirtButton).click();
+    }
+
+    public boolean isBoltTShirtRemoveButtonVisible(){
+        try {
+            return driver.findElement(removeBoltTShirtButton).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
+    public void clickFleeceJacketRemoveButton(){
+        driver.findElement(removeFleeceJacketButton).click();
+    }
+
+    public boolean isFleeceJacketRemoveButtonVisible(){
+        try {
+            return driver.findElement(removeFleeceJacketButton).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
+    public void clickOneSieRemoveButton(){
+        driver.findElement(removeOneSieButton).click();
+    }
+
+    public boolean isOneSieRemoveButtonVisible(){
+        try {
+            return driver.findElement(removeOneSieButton).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
+    public void clickRedTShirtRemoveButton(){
+        driver.findElement(removeRedTShirtButton).click();
+    }
+
+    public boolean isRedTShirtRemoveButtonVisible(){
+        try {
+            return driver.findElement(removeRedTShirtButton).isDisplayed();
+        }catch (NoSuchElementException e){
+            return false;
+        }
     }
 
     public ProductsPage clickContinueShoppingButton(){

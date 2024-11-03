@@ -1,0 +1,123 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/Bassel Fawzi/IdeaProjects/SauceLabsAutomationProject">
+        <classes>
+            <class name="checkoutcomplete.CheckoutCompleteTests">
+                <methods>
+                    <include name="testCartIconIsEmpty"/>
+                    <include name="testHamburgerIcon"/>
+                    <include name="testClickAllItems"/>
+                    <include name="testLogoutFunctionality"/>
+                    <include name="testResetAppStateFunctionality"/>
+                    <include name="testHamburgerCloseButtonFunctionality"/>
+                    <include name="testClickOnCartIcon"/>
+                    <include name="testThankYouIsCorrect"/>
+                    <include name="testClickBackToHomeButton"/>
+                </methods>
+            </class>
+            <class name="checkoutinfo.CheckoutInfoTests">
+                <methods>
+                    <include name="testHamburgerIcon"/>
+                    <include name="testClickAllItems"/>
+                    <include name="testLogoutFunctionality"/>
+                    <include name="testResetAppStateFunctionality"/>
+                    <include name="testHamburgerCloseButtonFunctionality"/>
+                    <include name="testClickOnCartIcon"/>
+                    <include name="testClickCancelButton"/>
+                    <include name="testClickContinueButton"/>
+                    <include name="testLeaveFirstNameFieldEmpty"/>
+                    <include name="testLeaveLastNameFieldEmpty"/>
+                    <include name="testLeavePostalCodeFieldEmpty"/>
+                    <include name="testErrorXButtonFunctionality"/>
+                </methods>
+            </class>
+            <class name="checkoutoverview.CheckoutOverviewTests">
+                <methods>
+                    <include name="testHamburgerIcon"/>
+                    <include name="testClickAllItems"/>
+                    <include name="testLogoutFunctionality"/>
+                    <include name="testResetAppStateFunctionality"/>
+                    <include name="testHamburgerCloseButtonFunctionality"/>
+                    <include name="testClickOnCartIcon"/>
+                    <include name="testClickProductTitle"/>
+                    <include name="testClickCancelButton"/>
+                    <include name="testClickFinishButton"/>
+                </methods>
+            </class>
+            <class name="login.LoginTests">
+                <methods>
+                    <include name="testStandardUserLogin"/>
+                    <include name="testLockedOutUserLogin"/>
+                    <include name="testProblemUserLogin"/>
+                    <include name="testPerformanceGlitchUserLogin"/>
+                    <include name="testErrorUserLogin"/>
+                    <include name="testVisualUserLogin"/>
+                    <include name="invalidPasswordUser"/>
+                </methods>
+            </class>
+            <class name="productdetails.ProductDetailsPageTests">
+                <methods>
+                    <include name="testCartBadgeVisibilityAfterAddingItem"/>
+                    <include name="testCartBadgeCounter"/>
+                    <include name="testHamburgerIcon"/>
+                    <include name="testAllItemsFunctionality"/>
+                    <include name="testResetAppStateFunctionality"/>
+                    <include name="testLogoutFunctionality"/>
+                    <include name="testHamburgerCloseButtonFunctionality"/>
+                    <include name="testBackToProductsButtonFunctionality"/>
+                    <include name="testAddToCartButtonFunctionality"/>
+                    <include name="testClickOnCartIcon"/>
+                    <include name="removeButtonFunctionality"/>
+                </methods>
+            </class>
+            <class name="products.ProductsPageTests">
+                <methods>
+                    <include name="testProductImagesAreUnique"/>
+                    <include name="testCartBadgeVisibilityAfterAddingItem"/>
+                    <include name="testBackpackAddToCartButtonFunctionality"/>
+                    <include name="testBikeLightAddToCartButtonFunctionality"/>
+                    <include name="testBoltTShirtAddToCartButtonFunctionality"/>
+                    <include name="testFleeceJacketAddToCartButtonFunctionality"/>
+                    <include name="testOneSieAddToCartButtonFunctionality"/>
+                    <include name="testRedTShirtAddToCartButtonFunctionality"/>
+                    <include name="testCartBadgeCounter"/>
+                    <include name="testBackpackRemoveButtonFunctionality"/>
+                    <include name="testBikeLightRemoveButtonFunctionality"/>
+                    <include name="testBoltTShirtRemoveButtonFunctionality"/>
+                    <include name="testFleeceJacketRemoveButtonFunctionality"/>
+                    <include name="testOneSieRemoveButtonFunctionality"/>
+                    <include name="testRedTShirtRemoveButtonFunctionality"/>
+                    <include name="testPriceSortingByPriceFunctionality"/>
+                    <include name="testPriceSortingByTitleFunctionality"/>
+                    <include name="testHamburgerIcon"/>
+                    <include name="testClickAllItems"/>
+                    <include name="testResetAppStateFunctionality"/>
+                    <include name="testLogoutFunctionality"/>
+                    <include name="testHamburgerCloseButtonFunctionality"/>
+                    <include name="testClickOnCartIcon"/>
+                    <include name="testClickOnProductTitle"/>
+                    <include name="testClickOnProductImage"/>
+                </methods>
+            </class>
+            <class name="yourcart.YourCartPageTests">
+                <methods>
+                    <include name="testHamburgerIcon"/>
+                    <include name="testAllItemsFunctionality"/>
+                    <include name="testLogoutFunctionality"/>
+                    <include name="testResetAppStateFunctionality"/>
+                    <include name="testHamburgerCloseButtonFunctionality"/>
+                    <include name="testClickOnCartIcon"/>
+                    <include name="testBackpackRemoveButtonFunctionality"/>
+                    <include name="testBikeLightRemoveButtonFunctionality"/>
+                    <include name="testBoltTShirtRemoveButtonFunctionality"/>
+                    <include name="testFleeceJacketRemoveButtonFunctionality"/>
+                    <include name="testOneSieRemoveButtonFunctionality"/>
+                    <include name="testRedTShirtRemoveButtonFunctionality"/>
+                    <include name="testContinueShoppingButton"/>
+                    <include name="testClickProductName"/>
+                    <include name="testClickCheckoutButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

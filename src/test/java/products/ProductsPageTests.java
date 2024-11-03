@@ -2,8 +2,10 @@ package products;
 
 import base.BaseTests;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.ProductsPage;
 
 import java.util.List;
 import java.util.Set;
@@ -14,6 +16,15 @@ public class ProductsPageTests extends BaseTests {
 
     public static final String USERNAME = "standard_user";
     public static final String PASSWORD = "secret_sauce";
+    private ProductsPage productsPage;
+
+
+    @BeforeMethod
+    public void navigateToProductsPage() {
+        loginPage.setUsername(USERNAME);
+        loginPage.setPassword(PASSWORD);
+        productsPage = loginPage.clickLogin();
+    }
 
     @DataProvider(name = "priceSortingOptions")
     public Object[][] priceSortingOptions() {
@@ -33,74 +44,72 @@ public class ProductsPageTests extends BaseTests {
 
     @Test
     public void testProductImagesAreUnique() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         Set<String> imagesSources = productsPage.getProductsImagesSourcesSet();
         assertEquals(imagesSources.size(), 6, "Products images are not unique.");
     }
 
-    //problem here//////////////////////////////////
-    ////////////////////
-    /////////////////
-    @Test
-    public void testProductImagesMatchTitles() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
-        var productsTitles = productsPage.getProductNameLastWord();
-        var productsSrc = productsPage.getProductsImageSrcList();
-        //SoftAssert softAssert = new SoftAssert();
-        for (int i = 0; i < productsSrc.size(); i++) {
-            System.out.println(productsTitles.get(i));
-            System.out.println(productsSrc.get(i));
-            //softAssert.assertTrue(productsSrc.get(i).contains(productsTitles.get(i)));
-            //softAssert.assertAll();
-            assertTrue(productsSrc.get(i).contains(productsTitles.get(i)), "Product image is not paired with correct title.");
-        }
-        //softAssert.assertAll();
-    }
-
     @Test
     public void testCartBadgeVisibilityAfterAddingItem() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
-        productsPage.clickAddToCartButton(0);
+        productsPage.clickAddBackpackToCart();
         assertTrue(productsPage.isCartBadgeVisible(), "Cart badge is not visible after adding an item.");
     }
 
     @Test
-    public void testFirstAddToCartButtonFunctionality() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
-        productsPage.clickAddToCartButton(0);
-        List<WebElement> addButtons = productsPage.getAddToCartButtons();
-        assertTrue(productsPage.isRemoveButtonVisible(0), "Remove button should be visible after adding item.");
-        assertEquals(addButtons.size(),5,"Add to cart button should not be visible after clicking it.");
+    public void testBackpackAddToCartButtonFunctionality() {
+        productsPage.clickAddBackpackToCart();
+        assertTrue(productsPage.isBackpackRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        assertFalse(productsPage.isBackpackAddToCartButtonVisible(),"Add to cart button should not be visible after clicking it.");
         assertTrue(productsPage.isCartBadgeVisible(), "Cart badge should be visible after adding item.");
         assertEquals(productsPage.getCartBadgeCounter(),1,"Cart badge value is incorrect");
     }
 
     @Test
-    public void testFinalAddToCartButtonFunctionality() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
-        productsPage.clickAddToCartButton(5);
-        List<WebElement> addButtons = productsPage.getAddToCartButtons();
-        assertTrue(productsPage.isRemoveButtonVisible(0), "Remove button should be visible after adding item.");
-        assertEquals(addButtons.size(),5,"Add to cart button should not be visible after clicking it.");
+    public void testBikeLightAddToCartButtonFunctionality() {
+        productsPage.clickAddBikeLightToCart();
+        assertTrue(productsPage.isBikeLightRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        assertFalse(productsPage.isBikeLightAddToCartButtonVisible(),"Add to cart button should not be visible after clicking it.");
+        assertTrue(productsPage.isCartBadgeVisible(), "Cart badge should be visible after adding item.");
+        assertEquals(productsPage.getCartBadgeCounter(),1,"Cart badge value is incorrect");
+    }
+
+    @Test
+    public void testBoltTShirtAddToCartButtonFunctionality() {
+        productsPage.clickAddBoltTShirtToCart();
+        assertTrue(productsPage.isBoltTShirtRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        assertFalse(productsPage.isBoltTShirtAddToCartButtonVisible(),"Add to cart button should not be visible after clicking it.");
+        assertTrue(productsPage.isCartBadgeVisible(), "Cart badge should be visible after adding item.");
+        assertEquals(productsPage.getCartBadgeCounter(),1,"Cart badge value is incorrect");
+    }
+
+    @Test
+    public void testFleeceJacketAddToCartButtonFunctionality() {
+        productsPage.clickAddFleeceJacketToCart();
+        assertTrue(productsPage.isFleeceJacketRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        assertFalse(productsPage.isFleeceJacketAddToCartButtonVisible(),"Add to cart button should not be visible after clicking it.");
+        assertTrue(productsPage.isCartBadgeVisible(), "Cart badge should be visible after adding item.");
+        assertEquals(productsPage.getCartBadgeCounter(),1,"Cart badge value is incorrect");
+    }
+
+    @Test
+    public void testOneSieAddToCartButtonFunctionality() {
+        productsPage.clickAddOneSieToCart();
+        assertTrue(productsPage.isOneSieRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        assertFalse(productsPage.isOneSieAddToCartButtonVisible(),"Add to cart button should not be visible after clicking it.");
+        assertTrue(productsPage.isCartBadgeVisible(), "Cart badge should be visible after adding item.");
+        assertEquals(productsPage.getCartBadgeCounter(),1,"Cart badge value is incorrect");
+    }
+
+    @Test
+    public void testRedTShirtAddToCartButtonFunctionality() {
+        productsPage.clickAddRedTShirtToCart();
+        assertTrue(productsPage.isRedTShirtRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        assertFalse(productsPage.isRedTShirtAddToCartButtonVisible(),"Add to cart button should not be visible after clicking it.");
         assertTrue(productsPage.isCartBadgeVisible(), "Cart badge should be visible after adding item.");
         assertEquals(productsPage.getCartBadgeCounter(),1,"Cart badge value is incorrect");
     }
 
     @Test
     public void testCartBadgeCounter() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         int initialNumberOfRemoveButtons = productsPage.getRemoveButtons().size();
         List<WebElement> addButtons = productsPage.getAddToCartButtons();
         for (WebElement add : addButtons) {
@@ -111,36 +120,67 @@ public class ProductsPageTests extends BaseTests {
     }
 
     @Test
-    public void testFirstRemoveButtonFunctionality() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
-        productsPage.clickAddToCartButton(0);
-        assertTrue(productsPage.isRemoveButtonVisible(0), "Remove button should be visible after adding item.");
-        productsPage.clickRemoveButton(0);
-        assertFalse(productsPage.isRemoveButtonVisible(0), "Remove button should no longer be visible after removing item.");
-        assertTrue(productsPage.isAddToCartButtonVisible(0), "Add to Cart button should be visible after removing item.");
+    public void testBackpackRemoveButtonFunctionality() {
+        productsPage.clickAddBackpackToCart();
+        assertTrue(productsPage.isBackpackRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        productsPage.clickBackpackRemoveButton();
+        assertFalse(productsPage.isBackpackRemoveButtonVisible(), "Remove button should no longer be visible after removing item.");
+        assertTrue(productsPage.isBackpackAddToCartButtonVisible(), "Add to Cart button should be visible after removing item.");
         assertFalse(productsPage.isCartBadgeVisible(), "Cart badge should not be visible after all items are removed.");
     }
 
     @Test
-    public void testFinalRemoveButtonFunctionality() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
-        productsPage.clickAddToCartButton(5);
-        assertTrue(productsPage.isRemoveButtonVisible(0), "Remove button should be visible after adding item.");
-        productsPage.clickRemoveButton(0);
-        assertFalse(productsPage.isRemoveButtonVisible(0), "Remove button should no longer be visible after removing item.");
-        assertTrue(productsPage.isAddToCartButtonVisible(5), "Add to Cart button should be visible after removing item.");
+    public void testBikeLightRemoveButtonFunctionality() {
+        productsPage.clickAddBikeLightToCart();
+        assertTrue(productsPage.isBikeLightRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        productsPage.clickBikeLightRemoveButton();
+        assertFalse(productsPage.isBikeLightRemoveButtonVisible(), "Remove button should no longer be visible after removing item.");
+        assertTrue(productsPage.isBikeLightAddToCartButtonVisible(), "Add to Cart button should be visible after removing item.");
+        assertFalse(productsPage.isCartBadgeVisible(), "Cart badge should not be visible after all items are removed.");
+    }
+
+    @Test
+    public void testBoltTShirtRemoveButtonFunctionality() {
+        productsPage.clickAddBoltTShirtToCart();
+        assertTrue(productsPage.isBoltTShirtRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        productsPage.clickBoltTShirtRemoveButton();
+        assertFalse(productsPage.isBoltTShirtRemoveButtonVisible(), "Remove button should no longer be visible after removing item.");
+        assertTrue(productsPage.isBoltTShirtAddToCartButtonVisible(), "Add to Cart button should be visible after removing item.");
+        assertFalse(productsPage.isCartBadgeVisible(), "Cart badge should not be visible after all items are removed.");
+    }
+
+    @Test
+    public void testFleeceJacketRemoveButtonFunctionality() {
+        productsPage.clickAddFleeceJacketToCart();
+        assertTrue(productsPage.isFleeceJacketRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        productsPage.clickFleeceJacketRemoveButton();
+        assertFalse(productsPage.isFleeceJacketRemoveButtonVisible(), "Remove button should no longer be visible after removing item.");
+        assertTrue(productsPage.isFleeceJacketAddToCartButtonVisible(), "Add to Cart button should be visible after removing item.");
+        assertFalse(productsPage.isCartBadgeVisible(), "Cart badge should not be visible after all items are removed.");
+    }
+
+    @Test
+    public void testOneSieRemoveButtonFunctionality() {
+        productsPage.clickAddOneSieToCart();
+        assertTrue(productsPage.isOneSieRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        productsPage.clickOneSieRemoveButton();
+        assertFalse(productsPage.isOneSieRemoveButtonVisible(), "Remove button should no longer be visible after removing item.");
+        assertTrue(productsPage.isOneSieAddToCartButtonVisible(), "Add to Cart button should be visible after removing item.");
+        assertFalse(productsPage.isCartBadgeVisible(), "Cart badge should not be visible after all items are removed.");
+    }
+
+    @Test
+    public void testRedTShirtRemoveButtonFunctionality() {
+        productsPage.clickAddRedTShirtToCart();
+        assertTrue(productsPage.isRedTShirtRemoveButtonVisible(), "Remove button should be visible after adding item.");
+        productsPage.clickRedTShirtRemoveButton();
+        assertFalse(productsPage.isRedTShirtRemoveButtonVisible(), "Remove button should no longer be visible after removing item.");
+        assertTrue(productsPage.isRedTShirtAddToCartButtonVisible(), "Add to Cart button should be visible after removing item.");
         assertFalse(productsPage.isCartBadgeVisible(), "Cart badge should not be visible after all items are removed.");
     }
 
     @Test(dataProvider = "priceSortingOptions")
     public void testPriceSortingByPriceFunctionality(String sortingOption, boolean isAscending) {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         productsPage.selectSortingBar(sortingOption);
         List<Double> prices = productsPage.getProductPrices();
         assertTrue(productsPage.isSortedByPrice(prices, isAscending), "Products are not sorted correctly by price for option: " + sortingOption + ".");
@@ -148,30 +188,29 @@ public class ProductsPageTests extends BaseTests {
 
     @Test(dataProvider = "alphabeticalSortingOptions")
     public void testPriceSortingByTitleFunctionality(String sortingOption, boolean isAscending) {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         productsPage.selectSortingBar(sortingOption);
         List<String> titles = productsPage.getProductNames();
         assertTrue(productsPage.isSortedByTitle(titles, isAscending), "Products are not sorted correctly by alphabetic order for option: " + sortingOption + ".");
     }
 
     @Test
-    public void testHamburgerIcon(){
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
+    public void testHamburgerIcon() {
         productsPage.clickHamburgerButton();
         productsPage.waitForHamburgerMenuToBeDisplayedWhenClicked();
-        assertTrue(productsPage.isAboutLinkVisible(),"Unable to find about link.");
+        assertTrue(productsPage.isAboutLinkVisible(),"Unable to find about link in hamburger menu.");
+    }
+
+    @Test
+    public void testClickAllItems() {
+        productsPage.clickHamburgerButton();
+        productsPage.waitForHamburgerMenuToBeDisplayedWhenClicked();
+        productsPage.clickAllItems();
+        assertTrue(productsPage.isSortingBarVisible(),"Products page should still be displayed after clicking all items.");
     }
 
     @Test
     public void testResetAppStateFunctionality() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
-        productsPage.clickAddToCartButton(0);
+        productsPage.clickAddBackpackToCart();
         assertEquals(productsPage.getCartBadgeCounter(), 1, "Cart Badge counter did not increase after clicking add to cart button.");
         productsPage.clickHamburgerButton();
         productsPage.waitForHamburgerMenuToBeDisplayedWhenClicked();
@@ -181,9 +220,6 @@ public class ProductsPageTests extends BaseTests {
 
     @Test
     public void testLogoutFunctionality() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         productsPage.clickHamburgerButton();
         productsPage.waitForHamburgerMenuToBeDisplayedWhenClicked();
         var loginPageAfterLogout = productsPage.clickLogout();
@@ -192,46 +228,34 @@ public class ProductsPageTests extends BaseTests {
 
     @Test
     public void testHamburgerCloseButtonFunctionality() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         productsPage.clickHamburgerButton();
         productsPage.waitForHamburgerMenuToBeDisplayedWhenClicked();
         productsPage.clickCloseHamburgerButton();
         productsPage.waitForAboutLinkToBeInvisible();
-        assertFalse(productsPage.isAboutLinkVisible(), "About link should not be visible");
+        assertFalse(productsPage.isAboutLinkVisible(), "About link should not be visible after closing hamburger menu.");
         assertTrue(productsPage.isHamburgerMenuIconVisible(), "Hamburger menu icon should be visible after closing the menu.");
     }
 
     @Test
     public void testClickOnCartIcon() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         var yourCartPage = productsPage.clickCartIcon();
         assertTrue(yourCartPage.isCheckoutButtonVisible(), "Unable to find checkout button.");
     }
 
     @Test
     public void testClickOnProductTitle() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         for (int i = 0; i < productsPage.getNumberOfProducts(); i++) {
             var productDetailsPage = productsPage.clickProductName(i);
-            assertTrue(productDetailsPage.isBackToProductsVisible(), "Unable to find back to products button.");
+            assertTrue(productDetailsPage.isBackToProductsButtonVisible(), "Unable to find back to products button.");
             productDetailsPage.clickBackToProductsButton();
         }
     }
 
     @Test
     public void testClickOnProductImage() {
-        loginPage.setUsername(USERNAME);
-        loginPage.setPassword(PASSWORD);
-        var productsPage = loginPage.clickLogin();
         for (int i = 0; i < productsPage.getNumberOfProducts(); i++){
             var productsDetailsPage = productsPage.clickProductImage(i);
-            assertTrue(productsDetailsPage.isBackToProductsVisible(),"Unable to find back to product button.");
+            assertTrue(productsDetailsPage.isBackToProductsButtonVisible(),"Unable to find back to products button.");
             productsDetailsPage.clickBackToProductsButton();
         }
     }

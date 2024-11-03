@@ -25,7 +25,7 @@ public class LoginTests extends BaseTests {
         loginPage.setUsername("standard_user");
         loginPage.setPassword("secret_sauce");
         var productsPage = loginPage.clickLogin();
-        assertTrue(productsPage.isLoaded(),"Products page did not load for standard_user.");
+        assertTrue(productsPage.isSortingBarVisible(),"Products page did not load for standard_user.");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class LoginTests extends BaseTests {
         loginPage.setUsername("problem_user");
         loginPage.setPassword("secret_sauce");
         var productsPage = loginPage.clickLogin();
-        assertTrue(productsPage.isLoaded(),"Products page did not load for problem_user.");
+        assertTrue(productsPage.isSortingBarVisible(),"Products page did not load for problem_user.");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class LoginTests extends BaseTests {
         loginPage.setPassword("secret_sauce");
         var productsPage = loginPage.clickLogin();
         productsPage.waitForPageToLoad();
-        assertTrue(productsPage.isLoaded(),"Products page did not load for performance_glitch_user.");
+        assertTrue(productsPage.isSortingBarVisible(),"Products page did not load for performance_glitch_user.");
     }
 
     @Test
@@ -59,7 +59,7 @@ public class LoginTests extends BaseTests {
         loginPage.setUsername("error_user");
         loginPage.setPassword("secret_sauce");
         var productsPage = loginPage.clickLogin();
-        assertTrue(productsPage.isLoaded(),"Products page did not load for error_user.");
+        assertTrue(productsPage.isSortingBarVisible(),"Products page did not load for error_user.");
     }
 
     @Test
@@ -67,7 +67,7 @@ public class LoginTests extends BaseTests {
         loginPage.setUsername("visual_user");
         loginPage.setPassword("secret_sauce");
         var productsPage = loginPage.clickLogin();
-        assertTrue(productsPage.isLoaded(),"Products page did not load for visual_user.");
+        assertTrue(productsPage.isSortingBarVisible(),"Products page did not load for visual_user.");
     }
 
     @Test(dataProvider = "invalidPasswordUsers")
